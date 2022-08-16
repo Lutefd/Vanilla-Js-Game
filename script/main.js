@@ -13,7 +13,7 @@ window.addEventListener('load', function () {
       this.input = new InputHandler(this);
     }
     update() {
-      this.player.update();
+      this.player.update(this.input.keys);
     }
     draw(context) {
       this.player.draw(context);

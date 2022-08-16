@@ -9,7 +9,10 @@ export class Player {
     this.frameX = 0;
     this.frameY = 0;
   }
-  update() {}
+  update(input) {
+    if (input.includes('ArrowRight')) this.x++;
+    else if (input.includes('ArrowLeft')) this.x--;
+  }
   draw(context) {
     context.drawImage(
       this.image,
