@@ -10,7 +10,10 @@ export class Player {
     this.image = document.getElementById('player');
     this.frameX = 0;
     this.frameY = 0;
-    this.maxFrame = 0;
+    this.maxFrame = 5;
+    this.fps = 20;
+    this.frameInterval = 1000 / this.fps;
+    this.frameTimer = 0;
     this.speed = 0;
     this.maxSpeed = 10;
     this.vy = 0;
@@ -24,7 +27,7 @@ export class Player {
     this.currentState = this.states[0];
     this.currentState.enter();
   }
-  update(input) {
+  update(input, deltaTime) {
     this.currentState.handleInput(input);
     //horizontal movement
     this.x += this.speed;
@@ -41,6 +44,14 @@ export class Player {
     } else this.vy = 0;
     if (this.y > this.gameHeight - this.height)
       this.y = this.gameHeight - this.height;
+    //sprite animation
+    if (this.frameTimer > this.frameInterval) {
+      if (this.frameX < this.maxFrame) this.frameX++;
+      else this.frameX = 0;
+      this.frameTimer = 0;
+    } else {
+      this.frameTimer += deltaTime;
+    }
   }
   draw(context) {
     context.drawImage(
