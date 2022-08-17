@@ -81,7 +81,7 @@ export class Player {
         enemy.x < this.x + this.width &&
         enemy.x + enemy.width > this.x &&
         enemy.y < this.y + this.height &&
-        enemy.y < enemy.height > this.y
+        enemy.y + enemy.height > this.y
       ) {
         enemy.markedForDeletion = true;
         this.game.score++;
