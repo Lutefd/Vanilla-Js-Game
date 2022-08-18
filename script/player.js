@@ -103,6 +103,8 @@ export class Player {
         enemy.y + enemy.height > this.y
       ) {
         enemy.markedForDeletion = true;
+        this.game.lives--;
+        if (this.game.lives <= 0) this.game.gameOver = true;
         this.game.collisions.push(
           new CollisionAnimation(
             this.game,
