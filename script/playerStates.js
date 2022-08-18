@@ -1,4 +1,4 @@
-import { Dust, Fire } from './particles.js';
+import { Dust, Fire, Splash } from './particles.js';
 
 const states = {
   SITTING: 0,
@@ -162,6 +162,15 @@ export class Diving extends State {
     );
     if (this.game.player.onGround()) {
       this.game.player.setState(states.RUNNING, 1);
+      for (let i = 0; i < 35; i++) {
+        this.game.particles.unshift(
+          new Splash(
+            this.game,
+            this.game.player.x + this.game.player.width * 0.5,
+            this.game.player.y + this.game.player.height
+          )
+        );
+      }
     } else if (input.includes('Enter') && this.game.player.onGround()) {
       this.game.player.setState(states.ROLLING, 2);
     }
