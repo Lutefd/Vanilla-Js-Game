@@ -28,7 +28,7 @@ export class UI {
       context.textAlign = 'center';
       context.font = this.fontSize * 2 + 'px ' + this.fontFamily;
 
-      if (this.game.score > 85) {
+      if (this.game.score > 80) {
         context.fillText(
           'O pai é bom demais',
           this.game.width * 0.5,
