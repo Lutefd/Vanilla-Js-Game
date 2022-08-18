@@ -104,19 +104,6 @@ window.addEventListener('load', function () {
   }
   const game = new Game(canvas.width, canvas.height);
   let lastTime = 0;
-  function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-      canvas.requestFullscreen().catch((err) => {
-        alert(`Não foi possível habilitar a tela cheia: ${err.message}`);
-      });
-    } else {
-      document.exitFullscreen();
-    }
-  }
-  fullScreenButton.addEventListener(`click`, toggleFullScreen);
-  if (game.gameOver === true) {
-    restartBtn.style.display = 'block';
-  }
 
   function animate(timeStamp) {
     const deltaTime = timeStamp - lastTime;
@@ -144,5 +131,6 @@ window.addEventListener('load', function () {
   restartBtn.addEventListener('click', () => {
     restartGame();
   });
+
   animate(0);
 });
