@@ -130,7 +130,6 @@ export class Player {
   restart() {
     this.x = 0;
     this.y = this.game.height - this.height - this.game.groundMargin;
-    this.frameY = 1;
-    this.maxFrame = 6;
+    this.setState(1, 1);
   }
 }
