@@ -7,7 +7,7 @@ import {
   Diving,
   Hit,
 } from './playerStates.js';
-
+import { CollisionAnimation } from './collisionAnimation.js';
 export class Player {
   constructor(game) {
     this.game = game;
@@ -97,6 +97,13 @@ export class Player {
         enemy.y + enemy.height > this.y
       ) {
         enemy.markedForDeletion = true;
+        this.game.collisions.push(
+          new CollisionAnimation(
+            this.game,
+            enemy.x + enemy.width * 0.5,
+            enemy.y + enemy.height * 0.5
+          )
+        );
         if (
           this.currentState === this.states[4] ||
           this.currentState === this.states[5]
