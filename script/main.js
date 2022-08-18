@@ -9,6 +9,7 @@ window.addEventListener('load', function () {
   canvas.width = 1200;
   canvas.height = 500;
   const fullScreenButton = document.getElementById('fullScreenBtn');
+  const restartBtn = document.getElementById('restartBtn');
   class Game {
     constructor(width, height) {
       this.width = width;
@@ -113,6 +114,10 @@ window.addEventListener('load', function () {
     }
   }
   fullScreenButton.addEventListener(`click`, toggleFullScreen);
+  if (game.gameOver === true) {
+    restartBtn.style.display = 'block';
+  }
+
   function animate(timeStamp) {
     const deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
@@ -120,6 +125,24 @@ window.addEventListener('load', function () {
     game.update(deltaTime);
     game.draw(ctx);
     if (!game.gameOver) requestAnimationFrame(animate);
+    if (game.gameOver) {
+      restartBtn.style.display = 'block';
+    }
   }
+  function restartGame() {
+    game.player.restart();
+    game.background.restart();
+    game.enemies = [];
+    game.score = 0;
+    game.gameOver = false;
+    game.time = 0;
+    game.player.currentState = game.player.states[0];
+    game.lives = 3;
+    restartBtn.style.display = 'none';
+    animate(0);
+  }
+  restartBtn.addEventListener('click', () => {
+    restartGame();
+  });
   animate(0);
 });

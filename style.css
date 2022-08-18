@@ -27,3 +27,17 @@ img {
   background-color: rgb(228, 228, 228);
   border-radius: 1rem;
 }
+#restartBtn {
+  display: none;
+  position: absolute;
+  padding: 0.8rem;
+  color: white;
+  background-color: rgb(12, 12, 12);
+  border-radius: 1rem;
+  border-style: none;
+  font-size: 1rem;
+  margin-top: 4rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
