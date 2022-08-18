@@ -5,6 +5,7 @@ import {
   Falling,
   Rolling,
   Diving,
+  Hit,
 } from './playerStates.js';
 
 export class Player {
@@ -32,6 +33,7 @@ export class Player {
       new Falling(this.game),
       new Rolling(this.game),
       new Diving(this.game),
+      new Hit(this.game),
     ];
   }
   update(input, deltaTime) {
@@ -95,9 +97,14 @@ export class Player {
         enemy.y + enemy.height > this.y
       ) {
         enemy.markedForDeletion = true;
-        this.game.score++;
-      } else {
-        //no collision
+        if (
+          this.currentState === this.states[4] ||
+          this.currentState === this.states[5]
+        ) {
+          this.game.score++;
+        } else {
+          this.setState(6, 0);
+        }
       }
     });
   }
