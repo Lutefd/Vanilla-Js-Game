@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: black;
+}
 #canvas1 {
   border: 5px solid black;
   position: absolute;
@@ -14,4 +17,13 @@
 }
 img {
   display: none;
+}
+#fullScreenBtn {
+  position: absolute;
+  padding: 1.5rem;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgb(228, 228, 228);
+  border-radius: 1rem;
 }

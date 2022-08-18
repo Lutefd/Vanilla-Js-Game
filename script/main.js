@@ -8,6 +8,7 @@ window.addEventListener('load', function () {
   const ctx = canvas.getContext('2d');
   canvas.width = 1200;
   canvas.height = 500;
+  const fullScreenButton = document.getElementById('fullScreenBtn');
   class Game {
     constructor(width, height) {
       this.width = width;
@@ -102,6 +103,16 @@ window.addEventListener('load', function () {
   }
   const game = new Game(canvas.width, canvas.height);
   let lastTime = 0;
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      canvas.requestFullscreen().catch((err) => {
+        alert(`Não foi possível habilitar a tela cheia: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  }
+  fullScreenButton.addEventListener(`click`, toggleFullScreen);
   function animate(timeStamp) {
     const deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
