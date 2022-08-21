@@ -60,7 +60,10 @@ export class Running extends State {
     }
     if (input.includes('ArrowUp') || input.includes('w')) {
       this.game.player.setState(states.JUMPING, 1);
-    } else if (input.includes('Enter')) {
+    } else if (
+      input.includes('Enter') &&
+      this.game.player.rollingDisabled === false
+    ) {
       this.game.player.setState(states.ROLLING, 2);
     }
   }
@@ -114,6 +117,7 @@ export class Rolling extends State {
     this.game.player.frameX = 0;
     this.game.player.maxFrame = 6;
     this.game.player.frameY = 6;
+    this.game.player.rollingTimer += 2;
   }
   handleInput(input) {
     this.game.particles.unshift(
@@ -139,6 +143,11 @@ export class Rolling extends State {
       this.game.player.onGround()
     ) {
       this.game.player.vy -= 27;
+    } else if (
+      this.game.player.rollingTimer > this.game.player.rollingInterval &&
+      this.game.player.onGround()
+    ) {
+      this.game.player.setState(states.RUNNING, 1);
     }
   }
 }

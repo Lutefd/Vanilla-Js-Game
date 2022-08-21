@@ -23,6 +23,9 @@ export class Player {
     this.fps = 20;
     this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
+    this.rollingInterval = 4000 / this.fps;
+    this.rollingTimer = 0;
+    this.rollingDisabled = false;
     this.speed = 0;
     this.maxSpeed = 10;
     this.vy = 0;
@@ -53,6 +56,7 @@ export class Player {
     )
       this.speed = -this.maxSpeed;
     else this.speed = 0;
+    console.log(this.rollingTimer);
     //horizontal boundaries
     if (this.x < 0) this.x = 0;
     if (this.x > this.game.width - this.width)
@@ -72,6 +76,17 @@ export class Player {
       this.frameTimer = 0;
     } else {
       this.frameTimer += deltaTime;
+    }
+    //rolling state limit
+    if (this.currentState == this.states[4]) {
+      if (this.rollingTimer > this.rollingInterval) {
+        this.rollingDisabled = true;
+      } else {
+        this.rollingTimer += 2;
+      }
+    } else {
+      this.rollingTimer = 0;
+      d;
     }
   }
   draw(context) {
